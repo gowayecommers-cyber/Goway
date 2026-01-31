@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoWay - Premium Clothing Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #5a67d8;
+            --primary-dark: #4c51bf;
+            --secondary: #f6ad55;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --gray: #718096;
+            --success: #48bb78;
+            --danger: #f56565;
+            --warning: #ed8936;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--dark);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 5px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 120px 0 60px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .page-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: white;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .breadcrumb i {
+            margin: 0 10px;
+            opacity: 0.8;
+        }
+
+        /* Header & Navbar */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            z-index: 1002;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        /* Desktop Navigation */
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-right: 30px;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+            position: relative;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 0;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover:after, .nav-links a.active:after {
+            width: 100%;
+        }
+
+        /* Mobile Navigation */
+        .nav-mobile {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark);
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 1002;
+        }
+
+        .hamburger:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: white;
+            z-index: 1001;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+            padding-top: 80px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0 20px;
+            margin-top: 20px;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 18px 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-links a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+
+        /* Overlay for mobile menu */
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* About Us Page */
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: var(--gray);
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .mission-card, .vision-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .mission-card h3, .vision-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .mission-card h3 i, .vision-card h3 i {
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            transition: var(--transition);
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #4a5568;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .nav-links li {
+                margin-left: 20px;
+            }
+            
+            .nav-links {
+                margin-right: 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            /* Switch to mobile navigation */
+            .nav-desktop {
+                display: none;
+            }
+            
+            .nav-mobile {
+                display: block;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .mobile-menu {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header {
+                padding: 100px 0 50px;
+            }
+            
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .logo i {
+                font-size: 1.5rem;
+            }
+            
+            .about-text h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Prevent body scroll when mobile menu is open */
+        body.menu-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navbar -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <img src="logo.png" alt="GoWay Fashion" style="width:70px; height:50px;">
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="nav-desktop">
+                    <ul class="nav-links">
+                        <li><a href="index.html" id="nav-home">Home</a></li>
+                        <li><a href="about.html" id="nav-about" class="active">About Us</a></li>
+                        <li><a href="contact.html" id="nav-contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Mobile Navigation -->
+                <div class="nav-mobile">
+                    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-overlay" id="mobile-overlay"></div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <div class="mobile-nav-header" style="padding: 20px; border-bottom: 1px solid #f0f0f0;">
+                
+            </div>
+            
+            <ul class="mobile-nav-links">
+                <li><a href="index.html" class="mobile-nav-link" id="mobile-nav-home">Home</a></li>
+                <li><a href="about.html" class="mobile-nav-link active" id="mobile-nav-about">About Us</a></li>
+                <li><a href="contact.html" class="mobile-nav-link" id="mobile-nav-contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>About GoWay</h1>
+            <p>Learn about our journey, mission, and commitment to providing the best fashion experience.</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>About Us</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Content -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="GoWay Store">
+                </div>
+                <div class="about-text">
+                    <h2>Our Story</h2>
+                    <p>Founded in 2026, GoWay began as a small boutique with a big vision: to make premium fashion accessible to everyone. What started as a single store in Mumbai has now grown into one of India's leading online fashion destinations.</p>
+                    <p>In our early days, we worked with just five local artisans and used only organic cotton. Today, we collaborate with over 200 artisans across India, supporting traditional crafts while incorporating modern designs. Our journey has been marked by continuous learning and adaptation, always staying true to our core principles of quality, ethics, and customer satisfaction.</p>
+                    <p>We believe that fashion should be inclusive, sustainable, and empowering. Our team curates collections that blend contemporary trends with timeless classics, ensuring there's something for every style and occasion. Each piece in our collection tells a story - of skilled craftsmanship, careful material selection, and thoughtful design.</p>
+                    <p>At GoWay, we're more than just a clothing store - we're a community of fashion enthusiasts who believe in quality, style, and ethical practices. Every piece in our collection is carefully selected for its design, comfort, and durability. We work closely with our manufacturing partners to ensure fair wages, safe working conditions, and environmentally responsible production methods.</p>
+                    <p>Our commitment extends beyond our products to our packaging (100% recycled and biodegradable), our shipping methods (carbon-neutral delivery options), and our customer education initiatives. We regularly host workshops on sustainable fashion, collaborate with environmental NGOs, and participate in community clean-up drives.</p>
+                    <p>As we continue to grow, we remain dedicated to our founding principles while constantly innovating to reduce our environmental footprint and increase our positive social impact. We're proud to have dressed over 50,000 satisfied customers and saved approximately 10,000 kg of textile waste from landfills through our recycling program.</p>
+                    <p>Join us on our journey to make fashion better - for people, for the planet, and for future generations.</p>
+                </div>
+            </div>
+            
+            <div class="mission-vision">
+                <div class="mission-card">
+                    <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p>To revolutionize the fashion industry by providing high-quality, sustainable clothing that empowers individuals to express their unique style while making ethical and environmentally conscious choices accessible to all.</p>
+                </div>
+                <div class="vision-card">
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>To become India's most trusted fashion brand, recognized globally for our commitment to quality, sustainability, and customer satisfaction while setting new standards in the e-commerce fashion industry.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 50px; text-align: center;">
+                <h2 class="section-title">Our Values</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 15px; box-shadow: var(--shadow);">
+                        <i class="fas fa-leaf" style="font-size: 2.5rem; color: var(--success); margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 15px; color: var(--dark);">Sustainability</h3>
+                        <p style="color: var(--gray);">We're committed to eco-friendly practices and sustainable materials.</p>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 15px; box-shadow: var(--shadow);">
+                        <i class="fas fa-award" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 15px; color: var(--dark);">Quality</h3>
+                        <p style="color: var(--gray);">Every product meets our high standards of craftsmanship and durability.</p>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: white; border-radius: 15px; box-shadow: var(--shadow);">
+                        <i class="fas fa-heart" style="font-size: 2.5rem; color: var(--danger); margin-bottom: 20px;"></i>
+                        <h3 style="margin-bottom: 15px; color: var(--dark);">Customer Love</h3>
+                        <p style="color: var(--gray);">Your satisfaction is our priority. We're here to serve you better every day.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>GoWay</h3>
+                    <p>Your one-stop destination for premium clothing and fashion accessories. Quality, style, and comfort combined.</p>
+                    <div class="social-icons" style="margin-top: 20px;">
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="margin-right: 15px;"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
+House Number -79, Purana Bazar, Harihar Pur, Dhanbad, Jharkhand, 828401</li>
+                        <li><i class="fas fa-phone" style="margin-right: 10px;"></i> +91 89814 47577</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px;"></i> gowayecommers@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 GoWay. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--danger);"></i> for fashion lovers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileOverlay = document.getElementById('mobile-overlay');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            // Toggle mobile menu
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('active');
+                mobileOverlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+                
+                // Toggle hamburger icon
+                const icon = hamburger.querySelector('i');
+                if (mobileMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+            
+            // Close mobile menu
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+                
+                // Reset hamburger icon
+                const icon = hamburger.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+            
+            // Event listeners
+            if (hamburger) {
+                hamburger.addEventListener('click', toggleMobileMenu);
+            }
+            
+            if (mobileOverlay) {
+                mobileOverlay.addEventListener('click', closeMobileMenu);
+            }
+            
+            // Close menu when clicking on a link
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+        });
+    </script>
+</body>
+</html>
